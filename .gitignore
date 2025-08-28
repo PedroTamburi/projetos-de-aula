@@ -1,0 +1,42 @@
+# Visual Studio files
+.vs/
+*.suo
+*.user
+*.ncb
+*.aps
+*.pch
+*.obj
+*.pdb
+*.tlog
+*.idb
+*.lib
+*.sbr
+*.res
+*.exe
+*.dll
+*.ilk
+*.exp
+*.opt
+*.bak
+*.ncb
+*.sdf
+*.cache
+*.VC.db
+*.VC.opendb
+
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+
+# Packages
+packages/
+node_modules/
+
+# Other temporary files
+*.log
+*.tmp
+/CampoMinado - Copia (2)
+/notepad++
+/CampoMinado - Copia
+/teste
+/CampoMinado.zip
