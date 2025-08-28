@@ -63,6 +63,7 @@ namespace CampoMinado
             buttonResetar.Text = ("Resetar");
 
             buttonVoltar.Click += Evento_buttonVoltar;
+            buttonResetar.Click += Evento_buttonResetar;
 
             Controls.Add(buttonVoltar);
             Controls.Add(buttonResetar);
@@ -265,7 +266,6 @@ namespace CampoMinado
                         matrizCampoVisual[i, j].Enabled = false;
                     }
                 }
-
             }
 
             //lógica 2
@@ -322,6 +322,11 @@ namespace CampoMinado
                 this.Controls.Remove(botao);
                 botao.Dispose();
             }
+        }
+
+        private void Evento_buttonResetar(object sender, EventArgs e)
+        {
+            IniciarNovoJogo(linhasCampoMinado, colunasCampoMinado);
         }
 
         /*private void Evento_buttonVoltar(object sender, EventArgs e)
@@ -476,6 +481,29 @@ namespace CampoMinado
                             }
                         }
                     }
+                }
+            }
+        }
+
+        private void IniciarNovoJogo(int linhas, int colunas)
+        {
+            
+            limparBotoes();
+
+            celulasReveladas = 0;
+
+            GerarCampo(linhas, colunas);
+        }
+
+        private void limparBotoes()
+        {
+            for (int i = this.Controls.Count - 1; i >= 0; i--)
+            {
+                Control control = this.Controls[i];
+                if ((control is Button && control.Tag is Point) || (control.Name == "Voltar" || control.Name == "Resetar"))
+                {
+                    this.Controls.Remove(control);
+                    control.Dispose();
                 }
             }
         }
