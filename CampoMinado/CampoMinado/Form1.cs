@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices.Marshalling;
+﻿using System.Drawing.Text;
+using System.Runtime.InteropServices.Marshalling;
 using static System.Windows.Forms.LinkLabel;
 
 namespace CampoMinado
@@ -9,11 +10,19 @@ namespace CampoMinado
         int tamanhoBotao = 30;
         int espacamento = 2;
         int bombas = 0;
+        int bandeiras = 0;
+        
 
         int linhasCampoMinado = 0;
         int colunasCampoMinado = 0;
 
         int celulasReveladas = 0;
+
+        Label labelBandeira = new Label();
+        Label labelTimer = new Label();
+
+        System.Windows.Forms.Timer gameTimer;
+        int segundosPassados = 0;
 
         //cria matriz campo logica onde vai ser gerado as bombas e numeros
         int[,] matrizCampoLogica;
@@ -172,6 +181,10 @@ namespace CampoMinado
 
             OcultarBotoes();
 
+            limparLabels();
+
+            labelBandeira = new Label();
+
             matrizCampoLogica = new int[linhas, colunas];
             matrizCampoVisual = new Button[linhas, colunas];
 
@@ -206,7 +219,43 @@ namespace CampoMinado
             if (cordX < 0) cordX = 0;
             if (cordY < 0) cordY = 0;
 
-            
+            bandeiras = bombas;
+
+            // posicionamentos dos labels
+
+            int labelAltura = 20;
+            int labelY = cordY - labelAltura - 10;
+
+            // criação e posicionamento do labelBandeira
+            labelBandeira = new Label();
+            labelBandeira.Name = "LabelBandeira";
+            labelBandeira.Text = ($"🚩: {bandeiras}");
+            labelBandeira.Font = new Font(labelBandeira.Font.FontFamily, 14, FontStyle.Bold);
+            labelBandeira.AutoSize = true;
+
+            Size flagSize = TextRenderer.MeasureText(labelBandeira.Text, labelBandeira.Font);
+            labelBandeira.Size = flagSize;
+
+            int bandeiraX = cordX + larguraTotalGrade - labelBandeira.Width;
+            labelBandeira.Location = new Point(bandeiraX, labelY);
+            Controls.Add(labelBandeira);
+
+            // criação e posicionamento do labelTimer
+            labelTimer = new Label();
+            labelBandeira.Name = "labelTimer";
+            labelTimer.Text = "⏱️: 000";
+            labelTimer.Font = new Font(labelTimer.Font.FontFamily, 14, FontStyle.Bold);
+            labelTimer.AutoSize = true;
+            labelTimer.Location = new Point(cordX, labelY);
+            Controls.Add(labelTimer);
+
+            // inicializa cronometro
+            segundosPassados = 0;
+            gameTimer = new System.Windows.Forms.Timer();
+            gameTimer.Interval = 1000; // define o intervalo para 1 segundo (1000 ms)
+            gameTimer.Tick += GameTimer_Tick; // associa o evento Tick ao método que irá atualizar a tela
+            gameTimer.Start(); // inicia o cronômetro
+            labelTimer.Text = ($"⏱️: {segundosPassados}");
 
             //cria os botoes(campo), ja colocando os botoes na sua localização certa
             for (int linha = 0; linha < linhas; linha++)
@@ -234,19 +283,6 @@ namespace CampoMinado
                     Controls.Add(buttonCampoMinado);
                 }
             }
-
-            /*for (int linha = 0; linha < linhas; linha++)
-            {
-                for (int coluna = 0; coluna < colunas; coluna++)
-                {
-                    if (matrizCampoLogica[linha, coluna] == -1)
-                    {
-                        matrizCampoVisual[linha, coluna].Text = "💣";
-                        matrizCampoVisual[linha, coluna].Font = new Font(matrizCampoVisual[linha, coluna].Font.FontFamily, 14, FontStyle.Bold);
-
-                    }
-                }
-            }*/
 
             VoltarResetBtns();
         }
@@ -316,6 +352,12 @@ namespace CampoMinado
             // Também remove os botões de controle pelo nome ou Tag
             botoesParaRemover.AddRange(this.Controls.Cast<Control>()
                 .Where(c => c is Button && (c.Name == "Voltar" || c.Name == "Resetar")).ToList());
+
+            if (labelBandeira != null && labelTimer != null)
+            {
+                labelBandeira.Visible = false;
+                labelTimer.Visible = false;
+            }
 
             foreach (var botao in botoesParaRemover)
             {
@@ -447,11 +489,18 @@ namespace CampoMinado
                 {
                     if (string.IsNullOrEmpty(botaoClicado.Text))
                     {
-                        botaoClicado.Text = "🚩";
+                        if (bandeiras > 0)
+                        {
+                            botaoClicado.Text = "🚩";
+                            bandeiras--;
+                            labelBandeira.Text = ($"🚩: {bandeiras}");
+                        }
                     }
                     else
                     {
                         botaoClicado.Text = "";
+                        bandeiras++;
+                        labelBandeira.Text = ($"🚩: {bandeiras}");
                     }
                 }
             }
@@ -505,6 +554,26 @@ namespace CampoMinado
                     this.Controls.Remove(control);
                     control.Dispose();
                 }
+            }
+        }
+
+        private void GameTimer_Tick(object sender, EventArgs e)
+        {
+            segundosPassados++;
+            labelTimer.Text = $"⏱️: {segundosPassados}";
+        }
+
+        private void limparLabels()
+        {
+            if (labelBandeira != null)
+            {
+                Controls.Remove(labelBandeira);
+                labelBandeira.Dispose();
+            }
+            if (labelTimer != null)
+            {
+                Controls.Remove(labelTimer);
+                labelTimer.Dispose();
             }
         }
     }
