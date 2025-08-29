@@ -11,6 +11,8 @@ namespace CampoMinado
         int espacamento = 2;
         int bombas = 0;
         int bandeiras = 0;
+
+        string dificuldade;
         
 
         int linhasCampoMinado = 0;
@@ -182,6 +184,7 @@ namespace CampoMinado
             OcultarBotoes();
 
             limparLabels();
+            limparTimer();
 
             labelBandeira = new Label();
 
@@ -194,14 +197,17 @@ namespace CampoMinado
             if (linhas == 9 && colunas == 9)
             {
                 bombas = 10;
+                dificuldade = "Fácil";
             }
             else if (linhas == 16 && colunas == 16)
             {
                 bombas = 40;
+                dificuldade = "Médio";
             }
             else
             {
                 bombas = 99;
+                dificuldade = "Difícil";
             }
 
             matrizCampoLogica = new int[linhas, colunas];
@@ -257,6 +263,8 @@ namespace CampoMinado
             gameTimer.Start(); // inicia o cronômetro
             labelTimer.Text = ($"⏱️: {segundosPassados}");
 
+            label1.Text = $"Dificuldade: {dificuldade}";
+
             //cria os botoes(campo), ja colocando os botoes na sua localização certa
             for (int linha = 0; linha < linhas; linha++)
             {
@@ -293,6 +301,7 @@ namespace CampoMinado
 
             if (celulasReveladas == totalCamposSemBombas)
             {
+                limparTimer();
                 MessageBox.Show("Você venceu!!!");
 
                 for (int i = 0; i < linhasCampoMinado; i++)
@@ -344,6 +353,8 @@ namespace CampoMinado
         {
             DesocultarBotoes();
 
+            limparTimer();
+
             // Lógica para remover os botões do tabuleiro e de controle
             var botoesParaRemover = this.Controls.Cast<Control>()
                 // Remove os botões do tabuleiro (que têm a Tag de coordenada Point)
@@ -352,6 +363,8 @@ namespace CampoMinado
             // Também remove os botões de controle pelo nome ou Tag
             botoesParaRemover.AddRange(this.Controls.Cast<Control>()
                 .Where(c => c is Button && (c.Name == "Voltar" || c.Name == "Resetar")).ToList());
+
+            label1.Text = "Dificuldade: ";
 
             if (labelBandeira != null && labelTimer != null)
             {
@@ -449,6 +462,7 @@ namespace CampoMinado
 
                 if (valorCampo == -1)
                 {
+                    limparTimer();
                     MessageBox.Show("Você perdeu!");
 
                     for (int i = 0; i < linhasCampoMinado; i++)
@@ -546,6 +560,8 @@ namespace CampoMinado
 
         private void limparBotoes()
         {
+            limparTimer();
+
             for (int i = this.Controls.Count - 1; i >= 0; i--)
             {
                 Control control = this.Controls[i];
@@ -574,6 +590,16 @@ namespace CampoMinado
             {
                 Controls.Remove(labelTimer);
                 labelTimer.Dispose();
+            }
+        }
+
+        private void limparTimer()
+        {
+            if(gameTimer != null)
+            {
+                gameTimer.Stop();
+                gameTimer.Dispose();
+                gameTimer = null;
             }
         }
     }
