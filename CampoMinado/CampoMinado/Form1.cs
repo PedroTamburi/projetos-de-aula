@@ -14,7 +14,6 @@ namespace CampoMinado
 
         string dificuldade;
         
-
         int linhasCampoMinado = 0;
         int colunasCampoMinado = 0;
 
