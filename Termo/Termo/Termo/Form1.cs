@@ -2,7 +2,8 @@ namespace Termo
 {
     public partial class Form1 : Form
     {
-        private Button[,] matrizLogica = new Button[5, 5];
+        private Button[,] matrizLogica = new Button[6, 5];
+        private Button[] vetorTeclado = new Button[26];
         private HashSet<Keys> charPermitidos = new HashSet<Keys>();
         private string palavraEscolhida = "";
         private char[] palavraAtual = new char[5];
@@ -14,20 +15,27 @@ namespace Termo
             this.KeyPreview = true;
 
             InitializeComponent();
-            CarregarBotoes();
-            CarregarCharPermitidos();
-            SelecionarPalavra();
-            LimparPalavraAtual();
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            FormPrincipal_Load(this, EventArgs.Empty);
         }
 
         private void SelecionarPalavra()
         {
-            string[] linhas = File.ReadAllLines("C:\\Users\\pedro\\OneDrive\\Área de Trabalho\\POE\\Termo\\palavras_filtradas_CincoLetras.txt");
+            string filePath = "palavras_filtradas_CincoLetras.Txt";
 
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Arquivo de palavras não encontrado!");
+                this.Close();
+                return;
+            }
+
+            string[] linhas = File.ReadAllLines(filePath);
             Random random = new Random();
             int IndiceAleatorio = random.Next(0, linhas.Length);
 
-            palavraEscolhida = linhas[IndiceAleatorio];
+            //palavraEscolhida = linhas[IndiceAleatorio];
             palavraEscolhida = linhas[IndiceAleatorio].ToUpper();
 
             //MessageBox.Show($"Palavra escolhida: {palavraEscolhida}");
@@ -46,7 +54,7 @@ namespace Termo
         {
             if (keyData == Keys.Enter && colunaAtual == 5)
             {
-                if (linhaAtual < 5)
+                if (linhaAtual < 6)
                 {
                     CompararPalavras();
                 }
@@ -68,6 +76,7 @@ namespace Termo
 
         private void CarregarBotoes()
         {
+            // carregar botoes de letras do jogo
             List<Button> botoesMatriz = new List<Button>();
 
             foreach (Control control in this.Controls)
@@ -80,15 +89,34 @@ namespace Termo
 
             botoesMatriz = botoesMatriz.OrderBy(b => b.Location.Y).ThenBy(b => b.Location.X).ToList();
 
-            int contador = 0;
+            int contadorMatriz = 0;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                        matrizLogica[i, j] = botoesMatriz[contador];
-                        contador++;
+                    matrizLogica[i, j] = botoesMatriz[contadorMatriz];
+                    contadorMatriz++;
                 }
+            }
+
+            // carregar botoes do teclado da tela
+            List<Button> botoesTeclado = new List<Button>();
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is Button && control.Tag != null && control.Tag.ToString() == "buttonTeclado")
+                {
+                    botoesTeclado.Add((Button)control);
+                }
+            }
+
+            int contadorTeclado = 0;
+
+            for (int i = 0; i < 26; i++)
+            {
+                vetorTeclado[i] = botoesTeclado[contadorTeclado];
+                contadorTeclado++;
             }
         }
 
@@ -102,6 +130,9 @@ namespace Termo
                 if (palavraAtual[i] == palavraCorretaTemp[i])
                 {
                     matrizLogica[linhaAtual, i].BackColor = Color.Green;
+                    matrizLogica[linhaAtual, i].ForeColor = Color.White;
+                    AtualizarCorTeclado(palavraAtual[i], Color.Green);
+
                     palavraCorretaTemp[i] = '\0';
                 }
                 else
@@ -121,7 +152,9 @@ namespace Termo
                         {
                             if (palavraAtual[i] == palavraCorretaTemp[j])
                             {
-                                matrizLogica[linhaAtual, i].BackColor = Color.Yellow;
+                                matrizLogica[linhaAtual, i].BackColor = Color.Orange;
+                                matrizLogica[linhaAtual, i].ForeColor = Color.White;
+                                AtualizarCorTeclado(palavraAtual[i], Color.Orange);
                                 palavraCorretaTemp[j] = '\0';
                                 letraEncontrada = true;
                                 break;
@@ -131,6 +164,8 @@ namespace Termo
                         if (!letraEncontrada)
                         {
                             matrizLogica[linhaAtual, i].BackColor = Color.Gray;
+                            matrizLogica[linhaAtual, i].ForeColor = Color.White;
+                            AtualizarCorTeclado(palavraAtual[i], Color.Gray);
                         }
                     }
                 }
@@ -143,7 +178,7 @@ namespace Termo
             else
             {
                 linhaAtual++;
-                if (linhaAtual >= 5)
+                if (linhaAtual >= 6)
                 {
                     MessageBox.Show($"Fim de jogo! A palavra era: {palavraEscolhida}");
                 }
@@ -153,17 +188,84 @@ namespace Termo
             LimparPalavraAtual();
         }
 
+        private async Task ReiniciarJogo()
+        {
+            linhaAtual = 0;
+            colunaAtual = 0;
+            LimparPalavraAtual();
+
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    matrizLogica[i, j].Text = "";
+                    matrizLogica[i, j].BackColor = Color.White;
+                    matrizLogica[i,j].ForeColor = Color.Black;
+                }
+            }
+
+            for (int i = 0; i < 26; i++)
+            {
+                vetorTeclado[i].BackColor = Color.White;
+                vetorTeclado[i].ForeColor = Color.Black;
+            }
+
+            SelecionarPalavra();
+            await Task.Delay(100);
+            button1.Focus();
+        }
+
+        private void AtualizarCorTeclado(char letra, Color novaCor)
+        {
+            string letraObtida = letra.ToString();
+
+            for (int i = 0; i < 26; i++)
+            {
+                if (vetorTeclado[i].Text == letraObtida)
+                {
+                    if (vetorTeclado[i].BackColor == Color.Green)
+                    {
+                        return;
+                    }
+                    if (vetorTeclado[i].BackColor == Color.Orange && novaCor == Color.Gray)
+                    {
+                        return;
+                    }
+                    vetorTeclado[i].BackColor = novaCor;
+                    vetorTeclado[i].ForeColor = Color.White;
+                    break;
+                }
+            }
+        }
+
+        private void FormPrincipal_Load(object sender, EventArgs e)
+        {
+            FormTutorial tutorial = new FormTutorial();
+
+            tutorial.ShowDialog();
+
+            IniciarJogo();
+        }
+
+        private void IniciarJogo()
+        {
+            CarregarBotoes();
+            CarregarCharPermitidos();
+            SelecionarPalavra();
+            LimparPalavraAtual();
+        }
+
         private void eventoTeclar(object sender, KeyEventArgs e)
         {
             System.Diagnostics.Debug.WriteLine($"Tecla pressionada: {e.KeyCode}");
 
-            if (!charPermitidos.Contains(e.KeyCode) || linhaAtual >= 5)
+            if (!charPermitidos.Contains(e.KeyCode) || linhaAtual >= 6)
                 return;
 
             // apertar backspace
             if (e.KeyCode == Keys.Back)
             {
-                if(colunaAtual > 0)
+                if (colunaAtual > 0)
                 {
                     colunaAtual--;
                     Button botaoAtual = matrizLogica[linhaAtual, colunaAtual];
@@ -190,7 +292,7 @@ namespace Termo
                 return;
             }*/
 
-            if (colunaAtual < 5) 
+            if (colunaAtual < 5)
             {
                 Button botaoAtual = matrizLogica[linhaAtual, colunaAtual];
                 char letra = e.KeyCode.ToString()[0];
@@ -199,6 +301,11 @@ namespace Termo
                 colunaAtual++;
                 e.Handled = true;
             }
+        }
+
+        private async void button54_Click(object sender, EventArgs e)
+        {
+            await ReiniciarJogo();
         }
     }
 }
