@@ -1,4 +1,4 @@
-namespace Termo
+ï»¿namespace Termo
 {
     public partial class Form1 : Form
     {
@@ -26,7 +26,7 @@ namespace Termo
 
             if (!File.Exists(filePath))
             {
-                MessageBox.Show("Arquivo de palavras não encontrado!");
+                MessageBox.Show("Arquivo de palavras nÃ£o encontrado!");
                 this.Close();
                 return;
             }
@@ -49,7 +49,7 @@ namespace Termo
             }
         }
 
-        // Método para capturar enter
+        // MÃ©todo para capturar enter
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == Keys.Enter && colunaAtual == 5)
@@ -173,7 +173,7 @@ namespace Termo
 
             if (acertou)
             {
-                MessageBox.Show("Parabéns! Você acertou!");
+                MessageBox.Show("ParabÃ©ns! VocÃª acertou!");
             }
             else
             {
@@ -215,6 +215,50 @@ namespace Termo
             button1.Focus();
         }
 
+        private void IniciarJogo()
+        {
+            CarregarBotoes();
+            CarregarCharPermitidos();
+            SelecionarPalavra();
+            LimparPalavraAtual();
+        }
+
+        private void btnTeclado_Click(object sender, EventArgs e)
+        {
+            Button botaoClicado = sender as Button;
+
+            if (botaoClicado != null)
+            {
+                if (botaoClicado.Text.ToUpper() == "ENTER")
+                {
+                    if (colunaAtual == 5)
+                    {
+                        if (linhaAtual < 6)
+                        {
+                            CompararPalavras();
+                        }
+                    }
+                }
+                else if (botaoClicado.Text.ToUpper() == "âŒ«")
+                {
+                    if (colunaAtual > 0)
+                    {
+                        colunaAtual--;
+                        Button botaoAtual = matrizLogica[linhaAtual, colunaAtual];
+                        botaoAtual.Text = "";
+                        palavraAtual[colunaAtual] = '\0';
+                    }
+                }
+                else if (colunaAtual < 5)
+                {
+                    char letra = botaoClicado.Text.ToUpper()[0];
+                    matrizLogica[linhaAtual, colunaAtual].Text = letra.ToString();
+                    palavraAtual[colunaAtual] = letra;
+                    colunaAtual++;
+                }
+            }
+        }
+
         private void AtualizarCorTeclado(char letra, Color novaCor)
         {
             string letraObtida = letra.ToString();
@@ -245,14 +289,6 @@ namespace Termo
             tutorial.ShowDialog();
 
             IniciarJogo();
-        }
-
-        private void IniciarJogo()
-        {
-            CarregarBotoes();
-            CarregarCharPermitidos();
-            SelecionarPalavra();
-            LimparPalavraAtual();
         }
 
         private void eventoTeclar(object sender, KeyEventArgs e)

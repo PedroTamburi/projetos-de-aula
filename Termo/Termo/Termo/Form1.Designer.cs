@@ -436,6 +436,7 @@
             button26.Tag = "buttonTeclado";
             button26.Text = "Q";
             button26.UseVisualStyleBackColor = true;
+            button26.Click += btnTeclado_Click;
             // 
             // button27
             // 
@@ -447,6 +448,7 @@
             button27.Tag = "buttonTeclado";
             button27.Text = "W";
             button27.UseVisualStyleBackColor = true;
+            button27.Click += btnTeclado_Click;
             // 
             // button28
             // 
@@ -458,6 +460,7 @@
             button28.Tag = "buttonTeclado";
             button28.Text = "E";
             button28.UseVisualStyleBackColor = true;
+            button28.Click += btnTeclado_Click;
             // 
             // button29
             // 
@@ -469,6 +472,7 @@
             button29.Tag = "buttonTeclado";
             button29.Text = "R";
             button29.UseVisualStyleBackColor = true;
+            button29.Click += btnTeclado_Click;
             // 
             // button30
             // 
@@ -480,6 +484,7 @@
             button30.Tag = "buttonTeclado";
             button30.Text = "T";
             button30.UseVisualStyleBackColor = true;
+            button30.Click += btnTeclado_Click;
             // 
             // button31
             // 
@@ -491,6 +496,7 @@
             button31.Tag = "buttonTeclado";
             button31.Text = "Y";
             button31.UseVisualStyleBackColor = true;
+            button31.Click += btnTeclado_Click;
             // 
             // button32
             // 
@@ -502,6 +508,7 @@
             button32.Tag = "buttonTeclado";
             button32.Text = "U";
             button32.UseVisualStyleBackColor = true;
+            button32.Click += btnTeclado_Click;
             // 
             // button33
             // 
@@ -513,6 +520,7 @@
             button33.Tag = "buttonTeclado";
             button33.Text = "I";
             button33.UseVisualStyleBackColor = true;
+            button33.Click += btnTeclado_Click;
             // 
             // button34
             // 
@@ -524,6 +532,7 @@
             button34.Tag = "buttonTeclado";
             button34.Text = "O";
             button34.UseVisualStyleBackColor = true;
+            button34.Click += btnTeclado_Click;
             // 
             // button35
             // 
@@ -535,6 +544,7 @@
             button35.Tag = "buttonTeclado";
             button35.Text = "P";
             button35.UseVisualStyleBackColor = true;
+            button35.Click += btnTeclado_Click;
             // 
             // button37
             // 
@@ -546,6 +556,7 @@
             button37.Tag = "buttonTeclado";
             button37.Text = "L";
             button37.UseVisualStyleBackColor = true;
+            button37.Click += btnTeclado_Click;
             // 
             // button38
             // 
@@ -557,6 +568,7 @@
             button38.Tag = "buttonTeclado";
             button38.Text = "K";
             button38.UseVisualStyleBackColor = true;
+            button38.Click += btnTeclado_Click;
             // 
             // button39
             // 
@@ -568,6 +580,7 @@
             button39.Tag = "buttonTeclado";
             button39.Text = "J";
             button39.UseVisualStyleBackColor = true;
+            button39.Click += btnTeclado_Click;
             // 
             // button40
             // 
@@ -579,6 +592,7 @@
             button40.Tag = "buttonTeclado";
             button40.Text = "H";
             button40.UseVisualStyleBackColor = true;
+            button40.Click += btnTeclado_Click;
             // 
             // button41
             // 
@@ -590,6 +604,7 @@
             button41.Tag = "buttonTeclado";
             button41.Text = "G";
             button41.UseVisualStyleBackColor = true;
+            button41.Click += btnTeclado_Click;
             // 
             // button42
             // 
@@ -601,6 +616,7 @@
             button42.Tag = "buttonTeclado";
             button42.Text = "F";
             button42.UseVisualStyleBackColor = true;
+            button42.Click += btnTeclado_Click;
             // 
             // button43
             // 
@@ -612,6 +628,7 @@
             button43.Tag = "buttonTeclado";
             button43.Text = "D";
             button43.UseVisualStyleBackColor = true;
+            button43.Click += btnTeclado_Click;
             // 
             // button44
             // 
@@ -623,6 +640,7 @@
             button44.Tag = "buttonTeclado";
             button44.Text = "S";
             button44.UseVisualStyleBackColor = true;
+            button44.Click += btnTeclado_Click;
             // 
             // button45
             // 
@@ -634,6 +652,7 @@
             button45.Tag = "buttonTeclado";
             button45.Text = "A";
             button45.UseVisualStyleBackColor = true;
+            button45.Click += btnTeclado_Click;
             // 
             // button36
             // 
@@ -645,6 +664,7 @@
             button36.Tag = "buttonBackspace";
             button36.Text = "⌫";
             button36.UseVisualStyleBackColor = true;
+            button36.Click += btnTeclado_Click;
             // 
             // button46
             // 
@@ -656,6 +676,7 @@
             button46.Tag = "buttonTeclado";
             button46.Text = "M";
             button46.UseVisualStyleBackColor = true;
+            button46.Click += btnTeclado_Click;
             // 
             // button47
             // 
@@ -667,6 +688,7 @@
             button47.Tag = "buttonTeclado";
             button47.Text = "N";
             button47.UseVisualStyleBackColor = true;
+            button47.Click += btnTeclado_Click;
             // 
             // button48
             // 
@@ -678,6 +700,7 @@
             button48.Tag = "buttonTeclado";
             button48.Text = "B";
             button48.UseVisualStyleBackColor = true;
+            button48.Click += btnTeclado_Click;
             // 
             // button49
             // 
@@ -689,6 +712,7 @@
             button49.Tag = "buttonTeclado";
             button49.Text = "V";
             button49.UseVisualStyleBackColor = true;
+            button49.Click += btnTeclado_Click;
             // 
             // button50
             // 
@@ -700,6 +724,7 @@
             button50.Tag = "buttonTeclado";
             button50.Text = "C";
             button50.UseVisualStyleBackColor = true;
+            button50.Click += btnTeclado_Click;
             // 
             // button51
             // 
@@ -711,6 +736,7 @@
             button51.Tag = "buttonTeclado";
             button51.Text = "X";
             button51.UseVisualStyleBackColor = true;
+            button51.Click += btnTeclado_Click;
             // 
             // button52
             // 
@@ -722,6 +748,7 @@
             button52.Tag = "buttonTeclado";
             button52.Text = "Z";
             button52.UseVisualStyleBackColor = true;
+            button52.Click += btnTeclado_Click;
             // 
             // button53
             // 
@@ -733,6 +760,7 @@
             button53.Tag = "buttonEnter";
             button53.Text = "enter";
             button53.UseVisualStyleBackColor = true;
+            button53.Click += btnTeclado_Click;
             // 
             // button54
             // 
