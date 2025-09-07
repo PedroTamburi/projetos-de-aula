@@ -1,0 +1,60 @@
+﻿<Window x:Class="pokedexApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pokedexApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1080">
+    <Grid Background="#FFFF6464" Margin="0,0,0,-16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="371*"/>
+            <ColumnDefinition Width="169*"/>
+        </Grid.ColumnDefinitions>
+        <Rectangle Height="75" VerticalAlignment="Top" Fill="#FFC53232" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="859" Grid.ColumnSpan="2">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.231"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.413"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle HorizontalAlignment="Left" Height="74" Margin="417,37,0,0" VerticalAlignment="Top" Width="741" RadiusX="53" RadiusY="53" Fill="#FFFF6464" Grid.ColumnSpan="2"/>
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,15,0,0">
+            <Ellipse HorizontalAlignment="Left" Height="90" Stroke="#FF7E9DA4" VerticalAlignment="Top" Width="90" Fill="#FFDAF8FE"/>
+            <Ellipse HorizontalAlignment="Left" Height="10" Margin="24,26,0,0" VerticalAlignment="Top" Width="10" Fill="#FF98EFFF"/>
+            <Ellipse HorizontalAlignment="Left" Height="76" Margin="8,7,0,0" Stroke="#FF3FAABD" VerticalAlignment="Top" Width="74" Fill="#FF52DFF8"/>
+        </Grid>
+        <Rectangle Height="120" VerticalAlignment="Top" Fill="#FFC53232" RenderTransformOrigin="0.5,0.5" Margin="0,0,313,0" RadiusX="50" RadiusY="50" HorizontalAlignment="Right" Width="498">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-0.646"/>
+                    <RotateTransform/>
+                    <TranslateTransform X="-0.739"/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Grid
+
+    VerticalAlignment="Top" Margin="10,15,0,0" HorizontalAlignment="Left">
+
+            <Ellipse
+
+    Width="10" VerticalAlignment="Top" Margin="24,26,0,0" Height="10" HorizontalAlignment="Left" Fill="#FF98EFFF"/>
+
+            <Ellipse
+
+    Width="90" VerticalAlignment="Top" Stroke="#FF7E9DA4" Height="90" HorizontalAlignment="Left" Fill="#FFDAF8FE"/>
+
+            <Ellipse HorizontalAlignment="Left" Height="76" Margin="8,7,0,0" Stroke="#FF3FAABD" VerticalAlignment="Top" Width="74" Fill="#FF52DFF8"/>
+            <Ellipse HorizontalAlignment="Left" Height="10" Margin="24,26,0,0" VerticalAlignment="Top" Width="10" Fill="#FF8BEEFF"/>
+        </Grid>
+        <Ellipse HorizontalAlignment="Left" Height="20" Margin="121,15,0,0" Stroke="#FF650000" VerticalAlignment="Top" Width="20" Fill="Red"/>
+        <Ellipse HorizontalAlignment="Left" Height="20" Margin="146,15,0,0" Stroke="#FF9A3F00" VerticalAlignment="Top" Width="20" Fill="#FFFF6900"/>
+        <Ellipse HorizontalAlignment="Left" Height="20" Margin="171,15,0,0" Stroke="#FF42A500" VerticalAlignment="Top" Width="20" Fill="#FF65FF00"/>
+
+    </Grid>
+</Window>
