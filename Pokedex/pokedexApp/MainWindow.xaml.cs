@@ -19,6 +19,16 @@ namespace pokedexApp
         public MainWindow()
         {
             InitializeComponent();
+
+            List<string> pokemons = new List<string>
+            {
+                "Bulbasaur", "Ivysaur", "Venusaur",
+                "Charmander", "Charmeleon", "Charizard",
+                "Squirtle", "Wartortle", "Blastoise",
+                "Pikachu", "Raichu"
+            };
+
+            PokemonComboBox.ItemsSource = pokemons;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿<Window x:Class="pokedexApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pokedexApp"
@@ -55,6 +56,16 @@
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="121,15,0,0" Stroke="#FF650000" VerticalAlignment="Top" Width="20" Fill="Red"/>
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="146,15,0,0" Stroke="#FF9A3F00" VerticalAlignment="Top" Width="20" Fill="#FFFF6900"/>
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="171,15,0,0" Stroke="#FF42A500" VerticalAlignment="Top" Width="20" Fill="#FF65FF00"/>
+        <Rectangle HorizontalAlignment="Left" Height="380" Margin="10,136,0,0" VerticalAlignment="Top" Width="420" Fill="White" RadiusX="25" RadiusY="25"/>
+        <Rectangle HorizontalAlignment="Left" Height="292" Margin="30,158,0,0" VerticalAlignment="Top" Width="380" Fill="#FF8EFFED" RadiusX="20" RadiusY="20"/>
+        <ComboBox x:Name="PokemonComboBox" HorizontalAlignment="Left" Height="45" Margin="30,459,0,0" VerticalAlignment="Top" Width="380" 
+        IsEditable="True"
+        IsTextSearchEnabled="True"
+        Text="Digite o nome do Pokémon..." FontSize="20">
+        </ComboBox>
+
 
     </Grid>
+
+
 </Window>
