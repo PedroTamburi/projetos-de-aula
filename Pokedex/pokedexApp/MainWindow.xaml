@@ -56,14 +56,47 @@
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="121,15,0,0" Stroke="#FF650000" VerticalAlignment="Top" Width="20" Fill="Red"/>
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="146,15,0,0" Stroke="#FF9A3F00" VerticalAlignment="Top" Width="20" Fill="#FFFF6900"/>
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="171,15,0,0" Stroke="#FF42A500" VerticalAlignment="Top" Width="20" Fill="#FF65FF00"/>
-        <Rectangle HorizontalAlignment="Left" Height="380" Margin="10,136,0,0" VerticalAlignment="Top" Width="420" Fill="White" RadiusX="25" RadiusY="25"/>
-        <Rectangle HorizontalAlignment="Left" Height="292" Margin="30,158,0,0" VerticalAlignment="Top" Width="380" Fill="#FF8EFFED" RadiusX="20" RadiusY="20"/>
-        <ComboBox x:Name="PokemonComboBox" HorizontalAlignment="Left" Height="45" Margin="30,459,0,0" VerticalAlignment="Top" Width="380" 
-        IsEditable="True"
-        IsTextSearchEnabled="True"
-        Text="Digite o nome do Pokémon..." FontSize="20">
+        <Rectangle 
+            HorizontalAlignment="Left" 
+            Height="380" Margin="10,136,0,0" 
+            VerticalAlignment="Top" 
+            Width="420" 
+            Fill="White" 
+            RadiusX="25" 
+            RadiusY="25"
+            />
+        <Rectangle 
+            x:Name ="PokemonSprite"
+            HorizontalAlignment="Left" 
+            Height="292" 
+            Margin="30,158,0,0" 
+            VerticalAlignment="Top" 
+            Width="380" Fill="#FF8EFFED" 
+            RadiusX="20" RadiusY="20"
+            Panel.ZIndex="10"/>
+        
+        <ComboBox x:Name="PokemonComboBox" 
+                  HorizontalAlignment="Left" 
+                  Height="45" 
+                  Margin="30,458,0,197" 
+                  Width="380" 
+                  IsEditable="True"
+                  IsTextSearchEnabled="False"
+                  StaysOpenOnEdit="True"
+                  IsTextSearchCaseSensitive="False"
+                  Loaded="PokemonComboBox_Loaded"
+                  SelectionChanged="PokemonComboBox_SelectionChanged"
+                  Text="Digite o nome do Pokémon..." 
+                  FontSize="20">
         </ComboBox>
 
+        <StackPanel 
+            Orientation="Horizontal" 
+            HorizontalAlignment="Left" 
+            Height="48" 
+            Margin="30,455,0,0" 
+            VerticalAlignment="Top" 
+            Width="380"/>
 
     </Grid>
 
