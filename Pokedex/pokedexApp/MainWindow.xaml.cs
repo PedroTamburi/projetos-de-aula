@@ -42,11 +42,51 @@ namespace pokedexApp
         public MainWindow()
         {
             InitializeComponent();
-            CarregarPokemons();
+            CarregarTodosPokemons();
         }
-        private void CarregarPokemons()
+        private async void CarregarTodosPokemons()
         {
+            try
+            {
+                using (HttpClient cliente = new HttpClient())
+                {
+                    string url = "https://pokeapi.co/api/v2/pokemon?limit=2000";
 
+                    string json = await cliente.GetStringAsync(url);
+
+                    PokemonApiResponse response = JsonConvert.DeserializeObject<PokemonApiResponse>(json);
+
+                    PokemonNomes = response.results.Select(p => char.ToUpper(p.name[0]) + p.name.Substring(1)).OrderBy(p => p).ToList();
+
+                    // codigo da linha acima refatorado, para melhor entendimento
+                    /*
+                    
+                    var pokemonResultado = response.results;
+
+                    var nomesFormatados = pokemonResultado.Select(p => char.ToUpper(p.name[0]) + p.name.Substring(1));
+
+                    var nomesOrdenados = nomesFormatados.OrderBy(name => name);
+
+                    PokemonNomes = nomesOrdenados.ToList();
+
+                    */
+
+                    PokemonComboBox.ItemsSource = PokemonNomes;
+
+
+                    view = (CollectionView)CollectionViewSource.GetDefaultView(PokemonComboBox.ItemsSource);
+                    view.Filter = FiltroDigitado;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao carregar lista de pokemons: "+ex.Message);
+            }
+        }
+
+        private bool FiltroDigitado(object item)
+        {
+            return true;
         }
     }
 }
