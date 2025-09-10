@@ -86,8 +86,6 @@
             IsTextSearchEnabled="False"
             StaysOpenOnEdit="True"
             IsTextSearchCaseSensitive="False"
-            Loaded="PokemonComboBox_Loaded"
-            SelectionChanged="PokemonComboBox_SelectionChanged"
             Text="Digite o nome do Pokémon..." 
             FontSize="20" RenderTransformOrigin="0.58,-1.48" />
 

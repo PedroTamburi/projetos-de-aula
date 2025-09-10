@@ -43,6 +43,27 @@ namespace pokedexApp
         {
             InitializeComponent();
             CarregarTodosPokemons();
+            ConfigurarComboBox();
+
+        }
+
+        private void ConfigurarComboBox()
+        {
+            PokemonComboBox.GotFocus += PokemonComboBox_CliqueFoco;
+        }
+
+        private void PokemonComboBox_CliqueFoco(object sender, RoutedEventArgs e)
+        {
+            if(PokemonComboBox.Text == "Digite o nome do Pokémon...") // combobox.text != null
+            {
+                PokemonComboBox.Text = "";
+            }
+
+            if(view != null)
+            {
+                view.Filter = null;
+                PokemonComboBox.IsDropDownOpen = true;
+            }
         }
         private async void CarregarTodosPokemons()
         {
