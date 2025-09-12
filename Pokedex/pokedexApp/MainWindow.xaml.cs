@@ -23,10 +23,6 @@ namespace pokedexApp
         {
             public string name { get; set; }
 
-            public int id { get; set; }
-
-            public string type { get; set; }
-
             public string url { get; set; }
         }
 
@@ -36,22 +32,50 @@ namespace pokedexApp
             public List<PokemonResult> results { get; set; }
         }
 
-        List<string> PokemonNomes = new List<string>();
-        CollectionView view;
+        public class PokemonDetalhes
+        {
+            public int id { get; set; }
+            public string? name { get; set; }
+            public int height { get; set; }
+            public int weight { get; set; }
+            public List<TipoPokemon>? types { get; set; }
+            public Sprites? sprites { get; set; }
+
+            public class TipoPokemon
+            {
+                public TipoInfo type { get; set; }
+            }
+
+            public class TipoInfo
+            {
+                public string name { get; set; }
+            }
+
+            public class Sprites
+            {
+                public string front_default { get; set; }
+            }
+
+
+            List<string> PokemonNomes = new List<string>();
+        CollectionView? view;
 
         public MainWindow()
         {
             InitializeComponent();
             CarregarTodosPokemons();
             ConfigurarComboBox();
-
         }
 
+        // FILTRO
         private void ConfigurarComboBox()
         {
+            PokemonComboBox.KeyUp += PokemonComboBox_TextoAlterado;
             PokemonComboBox.GotFocus += PokemonComboBox_CliqueFoco;
+            PokemonComboBox.DropDownOpened += PokemonComboBox_Aberto;
+            PokemonComboBox.SelectionChanged += PokemonComboBox_SelecaoAlterada;
+            
         }
-
         private void PokemonComboBox_CliqueFoco(object sender, RoutedEventArgs e)
         {
             if(PokemonComboBox.Text == "Digite o nome do Pokémon...") // combobox.text != null
@@ -65,6 +89,44 @@ namespace pokedexApp
                 PokemonComboBox.IsDropDownOpen = true;
             }
         }
+        private void PokemonComboBox_TextoAlterado(object sender, KeyEventArgs e)
+        {
+            if(view != null && !string.IsNullOrEmpty(PokemonComboBox.Text) && PokemonComboBox.Text != "Digite o nome do Pokémon...")
+            {
+                view.Filter = FiltroDigitado;
+                PokemonComboBox.IsDropDownOpen = true;
+            }else if(PokemonComboBox.Text == "")
+            {
+                view.Filter = null;
+            }
+        }
+        private void PokemonComboBox_Aberto(object sender, EventArgs e)
+        {
+            if (view != null)
+            {
+                view.Filter = null;
+            }
+        }
+        private void PokemonComboBox_ValidarEntradas(object sender, TextCompositionEventArgs e)
+        {
+            
+        }
+        private void PokemonComboBox_SelecaoAlterada(object sender, SelectionChangedEventArgs e)
+        {
+            if (PokemonComboBox.SelectedItem != null)
+            {
+                string pokemonSelecionado = PokemonComboBox.SelectedItem.ToString();
+                MessageBox.Show($"Pokémon selecionado: {pokemonSelecionado}");
+            }
+        }
+
+        private bool FiltroDigitado(object item)
+        {
+            string pokemon = item.ToString();
+            string textoPesquisa = PokemonComboBox.Text;
+            return pokemon.StartsWith(textoPesquisa, StringComparison.OrdinalIgnoreCase);
+        }
+
         private async void CarregarTodosPokemons()
         {
             try
@@ -94,9 +156,8 @@ namespace pokedexApp
 
                     PokemonComboBox.ItemsSource = PokemonNomes;
 
-
                     view = (CollectionView)CollectionViewSource.GetDefaultView(PokemonComboBox.ItemsSource);
-                    view.Filter = FiltroDigitado;
+                    //view.Filter = FiltroDigitado;
                 }
             }
             catch (Exception ex)
@@ -105,11 +166,5 @@ namespace pokedexApp
             }
         }
 
-        private bool FiltroDigitado(object item)
-        {
-
-            //teste
-            return true;
-        }
     }
 }
