@@ -107,6 +107,8 @@ namespace pokedexApp
 
         private bool FiltroDigitado(object item)
         {
+
+            //teste
             return true;
         }
     }
