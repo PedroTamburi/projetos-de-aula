@@ -6,7 +6,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pokedexApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1080">
+        Title="MainWindow" Height="700" Width="1080"
+        WindowStyle="None"
+        ResizeMode="NoResize">
     <Grid Background="#FFFF6464" Margin="0,0,0,-16">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="371*"/>
@@ -23,6 +25,16 @@
             </Rectangle.RenderTransform>
         </Rectangle>
         <Rectangle HorizontalAlignment="Left" Height="74" Margin="417,37,0,0" VerticalAlignment="Top" Width="741" RadiusX="53" RadiusY="53" Fill="#FFFF6464" Grid.ColumnSpan="2"/>
+        <Rectangle 
+            HorizontalAlignment="Left" 
+            Height="62" Margin="560,41,0,0" 
+            VerticalAlignment="Top" 
+            Width="420" 
+            Fill="White" 
+            RadiusX="25" 
+            RadiusY="25" Grid.ColumnSpan="2"
+            />
+
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,15,0,0">
             <Ellipse HorizontalAlignment="Left" Height="90" Stroke="#FF7E9DA4" VerticalAlignment="Top" Width="90" Fill="#FFDAF8FE"/>
             <Ellipse HorizontalAlignment="Left" Height="10" Margin="24,26,0,0" VerticalAlignment="Top" Width="10" Fill="#FF98EFFF"/>
@@ -58,7 +70,7 @@
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="171,15,0,0" Stroke="#FF42A500" VerticalAlignment="Top" Width="20" Fill="#FF65FF00"/>
         <Rectangle 
             HorizontalAlignment="Left" 
-            Height="380" Margin="10,136,0,0" 
+            Height="450" Margin="10,140,0,0" 
             VerticalAlignment="Top" 
             Width="420" 
             Fill="White" 
@@ -69,7 +81,7 @@
             x:Name ="PokemonSprite"
             HorizontalAlignment="Left" 
             Height="292" 
-            Margin="30,158,0,0" 
+            Margin="30,164,0,0" 
             VerticalAlignment="Top" 
             Width="380" Fill="#FF8EFFED" 
             RadiusX="20" RadiusY="20"
@@ -78,8 +90,8 @@
         <ComboBox 
             x:Name="PokemonComboBox" 
             HorizontalAlignment="Left" 
-            Height="45" 
-            Margin="30,458,0,0" 
+            Height="44" 
+            Margin="580,52,0,0" 
             VerticalAlignment="Top" 
             Width="380" 
             IsEditable="True"
@@ -87,7 +99,22 @@
             StaysOpenOnEdit="True"
             IsTextSearchCaseSensitive="False"
             Text="Digite o nome do Pokémon..." 
-            FontSize="20" RenderTransformOrigin="0.58,-1.48" />
+            FontSize="20" RenderTransformOrigin="0.58,-1.48" Background="Black" BorderThickness="0,0,0,0" Grid.ColumnSpan="2" />
+        <Button Content="X" HorizontalAlignment="Left" Height="25" Margin="303,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
+        <Button x:Name="MinimizarApp" Content="-" HorizontalAlignment="Left" Height="25" Margin="268,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
+        <StackPanel/>
+        <Rectangle HorizontalAlignment="Left" Height="56" Margin="96,461,0,0" Stroke="#FFB5B5B5" VerticalAlignment="Top" Width="248" RadiusX="25" RadiusY="25"/>
+        <TextBlock 
+            x:Name="NomePokemonEscolhido" 
+            HorizontalAlignment="Left" 
+            Height="28" Margin="115,476,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="210"
+            TextAlignment="Center" 
+            FontSize="18"
+            />
+        <Image x:Name="SpritePokemonEscolhido" HorizontalAlignment="Left" Height="292" Margin="30,164,0,0" VerticalAlignment="Top" Width="380"/>
 
     </Grid>
 

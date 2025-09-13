@@ -40,6 +40,7 @@ namespace pokedexApp
             public int weight { get; set; }
             public List<TipoPokemon>? types { get; set; }
             public Sprites? sprites { get; set; }
+        }
 
             public class TipoPokemon
             {
@@ -117,7 +118,31 @@ namespace pokedexApp
             {
                 string pokemonSelecionado = PokemonComboBox.SelectedItem.ToString();
                 MessageBox.Show($"Pokémon selecionado: {pokemonSelecionado}");
+                ObterDetalhesPokemonEscolhido(pokemonSelecionado);
             }
+        }
+        
+        private async void ObterDetalhesPokemonEscolhido(string pokemonEscolhido)
+        {
+            try
+            {
+                using (HttpClient cliente = new HttpClient())
+                {
+                    string url = $"https://pokeapi.co/api/v2/pokemon/{pokemonEscolhido.ToLower()}";
+                    string json = await cliente.GetStringAsync(url);
+                    PokemonDetalhes detalhes = JsonConvert.DeserializeObject<PokemonDetalhes>(json);
+                    CarregarDetalhesPokemonEscolhido(detalhes);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocorreu um erro: { ex.Message}");
+            }
+        }
+
+        private void CarregarDetalhesPokemonEscolhido(PokemonDetalhes detalhes)
+        {
+            NomePokemonEscolhido.Text = detalhes.name;
         }
 
         private bool FiltroDigitado(object item)
