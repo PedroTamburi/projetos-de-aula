@@ -167,7 +167,7 @@ namespace pokedexApp
             int idPokemon = detalhes.id;
             idPokemonEscolhido.Text = $"#{ idPokemon:D4}";
 
-            //Sprite do pokemon
+            //Sprite do pokemon 
             
 
         }
