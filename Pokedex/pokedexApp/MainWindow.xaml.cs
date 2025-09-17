@@ -118,7 +118,7 @@ namespace pokedexApp
             {
                 string pokemonSelecionado = PokemonComboBox.SelectedItem.ToString();
                 MessageBox.Show($"Pokémon selecionado: {pokemonSelecionado}");
-                ObterDetalhesPokemonEscolhido(pokemonSelecionado);
+                ObterDetalhesPokemonEscolhido(pokemonSelecionado); 
             }
         }
         
@@ -142,7 +142,34 @@ namespace pokedexApp
 
         private void CarregarDetalhesPokemonEscolhido(PokemonDetalhes detalhes)
         {
-            NomePokemonEscolhido.Text = detalhes.name;
+            if(detalhes == null)
+            {
+                //LimparDadosDaTela();
+                return;
+            }
+
+            //Nome do pokemon com texto formatado
+            string nomePokemon = detalhes.name;
+            if (!string.IsNullOrEmpty(nomePokemon))
+            {
+                char primeiraLetra = char.ToUpper(nomePokemon[0]);
+
+                string restoDoNome = nomePokemon.Substring(1);
+
+                NomePokemonEscolhido.Text = primeiraLetra + restoDoNome;
+            }
+            else
+            {
+                NomePokemonEscolhido.Text = string.Empty;
+            }
+
+            //ID do pokemon  
+            int idPokemon = detalhes.id;
+            idPokemonEscolhido.Text = $"#{ idPokemon:D4}";
+
+            //Sprite do pokemon
+            
+
         }
 
         private bool FiltroDigitado(object item)
