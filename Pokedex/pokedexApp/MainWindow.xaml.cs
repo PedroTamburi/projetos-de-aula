@@ -118,7 +118,8 @@ namespace pokedexApp
             {
                 string pokemonSelecionado = PokemonComboBox.SelectedItem.ToString();
                 MessageBox.Show($"Pokémon selecionado: {pokemonSelecionado}");
-                ObterDetalhesPokemonEscolhido(pokemonSelecionado); 
+                ObterDetalhesPokemonEscolhido(pokemonSelecionado);
+                LimparFiltro();
             }
         }
         
@@ -148,28 +149,49 @@ namespace pokedexApp
                 return;
             }
 
-            //Nome do pokemon com texto formatado
+            //Nome do pokemon com texto formatado e ID do pokemon
             string nomePokemon = detalhes.name;
+            int idPokemon = detalhes.id;
             if (!string.IsNullOrEmpty(nomePokemon))
             {
                 char primeiraLetra = char.ToUpper(nomePokemon[0]);
 
                 string restoDoNome = nomePokemon.Substring(1);
 
-                NomePokemonEscolhido.Text = primeiraLetra + restoDoNome;
+
+                NomePokemonEscolhido.Text = $"#{idPokemon:D4} | {primeiraLetra + restoDoNome} ";
             }
             else
             {
                 NomePokemonEscolhido.Text = string.Empty;
             }
 
-            //ID do pokemon  
-            int idPokemon = detalhes.id;
-            idPokemonEscolhido.Text = $"#{ idPokemon:D4}";
+            if (!string.IsNullOrEmpty(detalhes?.sprites?.front_default))
+            {
+                try
+                {
+                    Uri uri = new Uri(detalhes.sprites.front_default);
+                    BitmapImage bitmap = new BitmapImage();
 
-            //Sprite do pokemon 
-            
+                    bitmap.BeginInit();
 
+                    bitmap.UriSource = uri;
+                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
+
+                    bitmap.EndInit();
+
+                    SpritePokemonEscolhido.Source = bitmap;
+                }
+                catch (Exception ex)
+                {
+                    SpritePokemonEscolhido.Source = null;
+                    MessageBox.Show($"Erro ao carregar a imagem: {ex.Message}");
+                }
+            }
+            else
+            {
+                SpritePokemonEscolhido.Source = null;
+            }
         }
 
         private bool FiltroDigitado(object item)
