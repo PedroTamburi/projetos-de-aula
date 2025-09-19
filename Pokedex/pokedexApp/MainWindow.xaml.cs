@@ -203,7 +203,7 @@ namespace pokedexApp
 
         private void LimparFiltro()
         {
-            //teste
+
         }
 
         private async void CarregarTodosPokemons()
