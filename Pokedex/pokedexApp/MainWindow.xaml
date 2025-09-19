@@ -103,35 +103,25 @@
         <Button Content="X" HorizontalAlignment="Left" Height="25" Margin="303,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
         <Button x:Name="MinimizarApp" Content="-" HorizontalAlignment="Left" Height="25" Margin="268,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
 
-        <Rectangle HorizontalAlignment="Left" Height="56" Margin="96,467,0,0" Stroke="#FFB5B5B5" VerticalAlignment="Top" Width="248" RadiusX="25" RadiusY="25"/>
+        <Rectangle HorizontalAlignment="Left" Height="56" Margin="30,467,0,0" Stroke="#FFB5B5B5" VerticalAlignment="Top" Width="380" RadiusX="25" RadiusY="25"/>
 
         <TextBlock 
             x:Name="NomePokemonEscolhido" 
             HorizontalAlignment="Left" 
-            Height="28" Margin="115,482,0,0" 
+            Height="28" Margin="45,482,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
-            Width="210"
+            Width="345"
             TextAlignment="Left" 
             FontSize="18"
             />
         <Image x:Name="SpritePokemonEscolhido" 
-               HorizontalAlignment="Left" 
                Height="292" 
-               Margin="30,164,0,0" 
-               VerticalAlignment="Top" 
-               Width="380"/>
-        <TextBlock x:Name="idPokemonEscolhido" 
-            HorizontalAlignment="Left" 
-            Height="32" Margin="45,184,0,0" 
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            Width="111"
-            Panel.ZIndex="11" 
-            Background="#FF8EFFED" 
-            FontSize="18" 
-            FontWeight="Bold"
-            />
+               Margin="30,164,321,260" 
+               Width="380"
+               Stretch="Uniform"
+               Panel.ZIndex="12"
+               />
     </Grid>
 
 

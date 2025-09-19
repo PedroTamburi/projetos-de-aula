@@ -132,6 +132,7 @@ namespace pokedexApp
                     string json = await cliente.GetStringAsync(url);
                     PokemonDetalhes detalhes = JsonConvert.DeserializeObject<PokemonDetalhes>(json);
                     CarregarDetalhesPokemonEscolhido(detalhes);
+                    LimparFiltro();
                 }
             }
             catch (Exception ex)
@@ -148,27 +149,45 @@ namespace pokedexApp
                 return;
             }
 
-            //Nome do pokemon com texto formatado
+            //Nome do pokemon com texto formatado e ID pokemon
             string nomePokemon = detalhes.name;
             if (!string.IsNullOrEmpty(nomePokemon))
             {
                 char primeiraLetra = char.ToUpper(nomePokemon[0]);
 
+                int idPokemon = detalhes.id;
+
                 string restoDoNome = nomePokemon.Substring(1);
 
-                NomePokemonEscolhido.Text = primeiraLetra + restoDoNome;
+                NomePokemonEscolhido.Text = $"{idPokemon:D4} | {primeiraLetra + restoDoNome}";
             }
             else
             {
                 NomePokemonEscolhido.Text = string.Empty;
             }
 
-            //ID do pokemon  
-            int idPokemon = detalhes.id;
-            idPokemonEscolhido.Text = $"#{ idPokemon:D4}";
-
             //Sprite do pokemon 
-            
+
+            if (!string.IsNullOrEmpty(detalhes?.sprites?.front_default))
+            {
+                try
+                {
+                    Uri uri = new Uri(detalhes.sprites.front_default);
+
+                    BitmapImage bitmap = new BitmapImage(uri);
+
+                    SpritePokemonEscolhido.Source = bitmap;
+                }
+                catch (Exception ex)
+                {
+                    SpritePokemonEscolhido.Source = null;
+                    MessageBox.Show($"Erro ao carregar a imagem: {ex.Message}");
+                }
+            }
+            else
+            {
+                SpritePokemonEscolhido.Source = null;
+            }
 
         }
 
