@@ -201,6 +201,11 @@ namespace pokedexApp
             return pokemon.StartsWith(textoPesquisa, StringComparison.OrdinalIgnoreCase);
         }
 
+        private void LimparFiltro()
+        {
+
+        }
+
         private async void CarregarTodosPokemons()
         {
             try
