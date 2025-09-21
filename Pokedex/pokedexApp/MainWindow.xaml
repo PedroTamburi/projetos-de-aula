@@ -122,6 +122,8 @@
                Stretch="Uniform"
                Panel.ZIndex="12"
                />
+        <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="627" Margin="466,60,0,0" Stroke="Black" VerticalAlignment="Top" Width="593" RadiusX="25" RadiusY="25"/>
+        <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="205" Margin="466,482,0,0" Stroke="Black" VerticalAlignment="Top" Width="593"/>
     </Grid>
 
 

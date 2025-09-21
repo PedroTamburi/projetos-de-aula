@@ -40,22 +40,33 @@ namespace pokedexApp
             public int weight { get; set; }
             public List<TipoPokemon>? types { get; set; }
             public Sprites? sprites { get; set; }
+            public Species? species { get; set; }
         }
 
-            public class TipoPokemon
-            {
-                public TipoInfo type { get; set; }
-            }
+        public class TipoPokemon
+        {
+            public TipoInfo type { get; set; }
+        }
 
-            public class TipoInfo
-            {
-                public string name { get; set; }
-            }
+        public class TipoInfo
+        {
+            public string name { get; set; }
+        }
 
-            public class Sprites
-            {
-                public string front_default { get; set; }
-            }
+        public class Sprites
+        {
+            public string front_default { get; set; }
+        }
+
+        public class Species
+        {
+            public EvolutionChainUrl? evolution_species { get; set;}
+        }
+
+        public class EvolutionChainUrl
+        {
+            public string url{ get; set; }
+        }
 
 
             List<string> PokemonNomes = new List<string>();
@@ -118,7 +129,8 @@ namespace pokedexApp
             {
                 string pokemonSelecionado = PokemonComboBox.SelectedItem.ToString();
                 MessageBox.Show($"Pokémon selecionado: {pokemonSelecionado}");
-                ObterDetalhesPokemonEscolhido(pokemonSelecionado); 
+                ObterDetalhesPokemonEscolhido(pokemonSelecionado);
+                LimparFiltro();
             }
         }
         
@@ -132,7 +144,6 @@ namespace pokedexApp
                     string json = await cliente.GetStringAsync(url);
                     PokemonDetalhes detalhes = JsonConvert.DeserializeObject<PokemonDetalhes>(json);
                     CarregarDetalhesPokemonEscolhido(detalhes);
-                    LimparFiltro();
                 }
             }
             catch (Exception ex)
@@ -200,7 +211,14 @@ namespace pokedexApp
 
         private void LimparFiltro()
         {
+            if(view != null)
+            {
+                view.Filter = null;
+            }
 
+            PokemonComboBox.Text = "Digite o nome do Pokemo...";
+
+            PokemonComboBox.SelectedIndex = -1;
         }
 
         private async void CarregarTodosPokemons()
