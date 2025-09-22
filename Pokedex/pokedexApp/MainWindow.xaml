@@ -11,35 +11,91 @@
         WindowStyle="None"
         Focusable="True"
         Loaded="Window_Loaded">
+
     <Window.Resources>
+        <!-- Estilo para corrigir o erro de HorizontalContentAlignment -->
+        <Style TargetType="ComboBoxItem">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Style.Triggers>
+                <Trigger Property="IsHighlighted" Value="True">
+                    <Setter Property="Background" Value="#E3F2FD"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#BBDEFB"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Estilo customizado para o ComboBox -->
         <Style x:Key="SearchComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,4"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <TextBox x:Name="PART_EditableTextBox"
-                             Style="{x:Null}" 
-                             Focusable="True"
-                             IsReadOnly="{TemplateBinding IsReadOnly}"
-                             Background="White"
-                             BorderBrush="White"
-                             BorderThickness="{TemplateBinding BorderThickness}"
-                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
+                            <!-- TextBox editável -->
+                            <TextBox x:Name="PART_EditableTextBox"
+                                     Grid.Column="0"
+                                     Style="{x:Null}" 
+                                     Focusable="True"
+                                     IsReadOnly="{TemplateBinding IsReadOnly}"
+                                     Background="{TemplateBinding Background}"
+                                     BorderBrush="Transparent"
+                                     BorderThickness="0"
+                                     Padding="{TemplateBinding Padding}"
+                                     FontSize="{TemplateBinding FontSize}"
+                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+
+                            <!-- Botão dropdown (opcional) -->
+                            <Button x:Name="PART_DropDownToggle"
+                                    Grid.Column="1"
+                                    Width="20"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Content="▼"
+                                    FontSize="8"
+                                    IsTabStop="False"
+                                    ClickMode="Press"
+                                    />
+
+                            <!-- Popup com os itens -->
                             <Popup x:Name="PART_Popup"
                                    AllowsTransparency="True"
                                    IsOpen="{TemplateBinding IsDropDownOpen}"
                                    Placement="Bottom"
+                                   PopupAnimation="Slide"
+                                   Grid.ColumnSpan="2"
+                                   MaxHeight="200"
                                    Width="{TemplateBinding ActualWidth}">
-                                <Border BorderThickness="{TemplateBinding BorderThickness}" 
-                                        Background="White">
-                                    <ScrollViewer>
+                                <Border Background="White"
+                                        BorderBrush="#CCCCCC"
+                                        BorderThickness="1"
+                                        CornerRadius="4">
+                                    <ScrollViewer MaxHeight="200">
                                         <ItemsPresenter/>
                                     </ScrollViewer>
                                 </Border>
                             </Popup>
                         </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDropDownOpen" Value="True">
+                                <Setter TargetName="PART_DropDownToggle" Property="Content" Value="▲"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -51,6 +107,8 @@
             <ColumnDefinition Width="731*"/>
             <ColumnDefinition Width="349*"/>
         </Grid.ColumnDefinitions>
+
+        <!-- Fundo superior -->
         <Rectangle Height="75" VerticalAlignment="Top" Fill="#FFC53232" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Right" Width="859" Grid.ColumnSpan="2">
             <Rectangle.RenderTransform>
                 <TransformGroup>
@@ -61,6 +119,8 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
+
+        <!-- Círculo decorativo superior -->
         <Rectangle 
             HorizontalAlignment="Left" 
             Height="74" 
@@ -70,6 +130,8 @@
             RadiusY="53" 
             Fill="#FFFF6464" 
             Grid.ColumnSpan="2"/>
+
+        <!-- Fundo do ComboBox -->
         <Rectangle 
             HorizontalAlignment="Left" 
             Height="62" Margin="10,571,0,0" 
@@ -77,14 +139,16 @@
             Width="420" 
             Fill="White" 
             RadiusX="25" 
-            RadiusY="25"
-            />
+            RadiusY="25"/>
 
+        <!-- Círculo principal (tela do Pokédex) -->
         <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,15,0,0" Height="90" Width="90">
             <Ellipse HorizontalAlignment="Left" Height="90" Stroke="#FF7E9DA4" VerticalAlignment="Top" Width="90" Fill="#FFDAF8FE"/>
-            <Ellipse HorizontalAlignment="Left" Height="10" Margin="24,26,0,0" VerticalAlignment="Top" Width="10" Fill="#FF98EFFF"/>
             <Ellipse HorizontalAlignment="Left" Height="76" Margin="8,7,0,0" Stroke="#FF3FAABD" VerticalAlignment="Top" Width="74" Fill="#FF52DFF8"/>
+            <Ellipse HorizontalAlignment="Left" Height="10" Margin="24,26,0,0" VerticalAlignment="Top" Width="10" Fill="#FF8BEEFF"/>
         </Grid>
+
+        <!-- Fundo decorativo -->
         <Rectangle Height="120" VerticalAlignment="Top" Fill="#FFC53232" RenderTransformOrigin="0.5,0.5" Margin="0,0,313,0" RadiusX="50" RadiusY="50" HorizontalAlignment="Right" Width="498">
             <Rectangle.RenderTransform>
                 <TransformGroup>
@@ -95,24 +159,25 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
+
+        <!-- Botões coloridos -->
+        <Ellipse HorizontalAlignment="Left" Height="90" Stroke="#FF7E9DA4" VerticalAlignment="Top" Width="90" Fill="#FFDAF8FE" Margin="13,10,0,0"/>
+        <Ellipse HorizontalAlignment="Left" Height="76" Margin="21,17,0,0" Stroke="#FF3FAABD" VerticalAlignment="Top" Width="74" Fill="#FF52DFF8"/>
+
         <Grid
 
-    VerticalAlignment="Top" Margin="10,15,0,0" HorizontalAlignment="Left" Height="90" Width="90">
+VerticalAlignment="Top" Margin="10,15,0,0" HorizontalAlignment="Left" Height="90" Width="90">
 
             <Ellipse
 
-    Width="10" VerticalAlignment="Top" Margin="24,26,0,0" Height="10" HorizontalAlignment="Left" Fill="#FF98EFFF"/>
-
-            <Ellipse
-
-    Width="90" VerticalAlignment="Top" Stroke="#FF7E9DA4" Height="90" HorizontalAlignment="Left" Fill="#FFDAF8FE"/>
-
-            <Ellipse HorizontalAlignment="Left" Height="76" Margin="8,7,0,0" Stroke="#FF3FAABD" VerticalAlignment="Top" Width="74" Fill="#FF52DFF8"/>
-            <Ellipse HorizontalAlignment="Left" Height="10" Margin="24,26,0,0" VerticalAlignment="Top" Width="10" Fill="#FF8BEEFF"/>
+Width="10" VerticalAlignment="Top" Margin="26,20,0,0" Height="10" HorizontalAlignment="Left" Fill="#FF98EFFF"/>
         </Grid>
+
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="121,15,0,0" Stroke="#FF650000" VerticalAlignment="Top" Width="20" Fill="Red"/>
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="146,15,0,0" Stroke="#FF9A3F00" VerticalAlignment="Top" Width="20" Fill="#FFFF6900"/>
         <Ellipse HorizontalAlignment="Left" Height="20" Margin="171,15,0,0" Stroke="#FF42A500" VerticalAlignment="Top" Width="20" Fill="#FF65FF00"/>
+
+        <!-- Área principal da tela -->
         <Rectangle 
             HorizontalAlignment="Left" 
             Height="412" Margin="10,140,0,0" 
@@ -120,10 +185,11 @@
             Width="420" 
             Fill="White" 
             RadiusX="25" 
-            RadiusY="25"
-            />
+            RadiusY="25"/>
+
+        <!-- Fundo da tela do Pokémon -->
         <Rectangle 
-            x:Name ="PokemonSprite"
+            x:Name="PokemonSprite"
             HorizontalAlignment="Left" 
             Height="292" 
             Margin="30,164,0,0" 
@@ -132,43 +198,7 @@
             RadiusX="20" RadiusY="20"
             Panel.ZIndex="10"/>
 
-        <ComboBox 
-            x:Name="PokemonComboBox" 
-            HorizontalAlignment="Left" 
-            Height="44" 
-            Width="380"
-            Margin="30,582,0,0" 
-            VerticalAlignment="Top" 
-            IsEditable="True"
-            IsTextSearchEnabled="False"
-            StaysOpenOnEdit="True"
-            IsTextSearchCaseSensitive="False"
-            Text="Digite o nome do Pokémon..."
-            FontSize="20" 
-            RenderTransformOrigin="0.58,-1.48" 
-            Background="Black" 
-            BorderThickness="0,0,0,0" 
-            VerticalContentAlignment="Center"
-            HorizontalContentAlignment="Left"
-            Style="{StaticResource SearchComboBoxStyle}"
-            />
-        
-        
-        <Button Content="X" HorizontalAlignment="Left" Height="25" Margin="303,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
-        <Button x:Name="MinimizarApp" Content="-" HorizontalAlignment="Left" Height="25" Margin="268,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
-
-        <Rectangle HorizontalAlignment="Left" Height="56" Margin="30,467,0,0" Stroke="#FFB5B5B5" VerticalAlignment="Top" Width="380" RadiusX="25" RadiusY="25"/>
-
-        <TextBlock 
-            x:Name="NomePokemonEscolhido" 
-            HorizontalAlignment="Left" 
-            Height="28" Margin="45,482,0,0" 
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            Width="345"
-            TextAlignment="Left" 
-            FontSize="18"
-            />
+        <!-- Imagem do Pokémon -->
         <Image x:Name="SpritePokemonEscolhido" 
                Height="292" 
                Margin="30,164,321,260" 
@@ -176,9 +206,54 @@
                Stretch="Uniform"
                Panel.ZIndex="12"
                />
+
+        <!-- ComboBox CORRIGIDO -->
+        <ComboBox x:Name="PokemonComboBox" 
+                  HorizontalAlignment="Left" 
+                  Height="44" 
+                  Width="380"
+                  Margin="30,582,0,0" 
+                  VerticalAlignment="Top" 
+                  IsEditable="True"
+                  IsTextSearchEnabled="False"
+                  StaysOpenOnEdit="True"
+                  IsTextSearchCaseSensitive="False"
+                  Text="Digite o nome do Pokémon..."
+                  FontSize="20" 
+                  RenderTransformOrigin="0.58,-1.48" 
+                  Background="White" 
+                  BorderThickness="1" 
+                  BorderBrush="#CCCCCC"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Left"
+                  Style="{StaticResource SearchComboBoxStyle}">
+            <ComboBox.ItemContainerStyle>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="Padding" Value="8,4"/>
+                </Style>
+            </ComboBox.ItemContainerStyle>
+        </ComboBox>
+
+        <!-- Botões de controle da janela -->
+        <Button Content="X" HorizontalAlignment="Left" Height="25" Margin="303,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
+        <Button x:Name="MinimizarApp" Content="-" HorizontalAlignment="Left" Height="25" Margin="268,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
+
+        <!-- Área do nome do Pokémon -->
+        <Rectangle HorizontalAlignment="Left" Height="56" Margin="30,467,0,0" Stroke="#FFB5B5B5" VerticalAlignment="Top" Width="380" RadiusX="25" RadiusY="25"/>
+
+        <TextBlock x:Name="NomePokemonEscolhido" 
+                   HorizontalAlignment="Left" 
+                   Height="28" Margin="45,482,0,0" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top" 
+                   Width="345"
+                   TextAlignment="Left" 
+                   FontSize="18"/>
+
+        <!-- Área lateral (adicione mais elementos aqui se necessário) -->
         <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="627" Margin="466,60,0,0" Stroke="Black" VerticalAlignment="Top" Width="593" RadiusX="25" RadiusY="25"/>
         <Rectangle Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="205" Margin="466,482,0,0" Stroke="Black" VerticalAlignment="Top" Width="593"/>
     </Grid>
-
-
 </Window>

@@ -41,7 +41,7 @@ namespace pokedexApp
             public int weight { get; set; }
             public List<TipoPokemon>? types { get; set; }
             public Sprites? sprites { get; set; }
-            //public Species? species { get; set; }
+            public Species? species { get; set; }
         }
 
         public class TipoPokemon
@@ -59,7 +59,7 @@ namespace pokedexApp
             public string front_default { get; set; }
         }
 
-        /*public class Species
+        public class Species
         {
             public EvolutionChainUrl? evolution_species { get; set;}
         }
@@ -67,7 +67,7 @@ namespace pokedexApp
         public class EvolutionChainUrl
         {
             public string url{ get; set; }
-        }*/
+        }
 
 
         List<string> PokemonNomes = new List<string>();
@@ -104,6 +104,7 @@ namespace pokedexApp
             if(PokemonComboBox.Text == "Digite o nome do Pokémon...") // combobox.text != null
             {
                 PokemonComboBox.Text = "";
+                PokemonComboBox.SelectedIndex = -1;
             }
 
             if(view != null)
@@ -142,18 +143,14 @@ namespace pokedexApp
                 return;
             }
 
-            string pokemonSelecionado = PokemonComboBox.SelectedItem?.ToString();
-            int indiceSelecionado = PokemonComboBox.SelectedIndex;
+            string pokemonSelecionado = PokemonComboBox.SelectedItem.ToString();
+            //int indiceSelecionado = PokemonComboBox.SelectedIndex;
 
             if (!string.IsNullOrEmpty(pokemonSelecionado))
             {
-
-                if (indiceSelecionado > 0)
-                {
                     //RETIRAR DPS
                     MessageBox.Show($"Pokémon selecionado: {pokemonSelecionado}");
                     ObterDetalhesPokemonEscolhido(pokemonSelecionado);
-                }
             }
             LimparFiltro();
         }
@@ -188,7 +185,8 @@ namespace pokedexApp
                 view.Filter = null;
             }
 
-            PokemonComboBox.SelectedIndex = 0;
+            PokemonComboBox.SelectedIndex = -1;
+
             PokemonComboBox.Text = "Digite o nome do Pokemon...";
 
             TraversalRequest request = new TraversalRequest(FocusNavigationDirection.Next);
@@ -292,7 +290,7 @@ namespace pokedexApp
 
                     PokemonNomes = response.results.Select(p => char.ToUpper(p.name[0]) + p.name.Substring(1)).OrderBy(p => p).ToList();
 
-                    PokemonNomes.Insert(0, "Digite o nome do Pokemon...");
+                    //PokemonNomes.Insert(-1, "Digite o nome do Pokemon...");
 
                     // codigo da linha acima refatorado, para melhor entendimento
                     /*
@@ -308,10 +306,6 @@ namespace pokedexApp
                     */
 
                     PokemonComboBox.ItemsSource = PokemonNomes;
-
-                    PokemonComboBox.SelectedIndex = 0;
-
-                    //PokemonComboBox.SelectedIndex = 0;
 
                     view = (CollectionView)CollectionViewSource.GetDefaultView(PokemonComboBox.ItemsSource);
                     //view.Filter = FiltroDigitado;
