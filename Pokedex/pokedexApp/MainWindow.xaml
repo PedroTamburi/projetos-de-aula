@@ -7,8 +7,45 @@
         xmlns:local="clr-namespace:pokedexApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="1080"
+        ResizeMode="NoResize"
         WindowStyle="None"
-        ResizeMode="NoResize">
+        Focusable="True"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="SearchComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <TextBox x:Name="PART_EditableTextBox"
+                             Style="{x:Null}" 
+                             Focusable="True"
+                             IsReadOnly="{TemplateBinding IsReadOnly}"
+                             Background="White"
+                             BorderBrush="White"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+
+                            <Popup x:Name="PART_Popup"
+                                   AllowsTransparency="True"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}"
+                                   Placement="Bottom"
+                                   Width="{TemplateBinding ActualWidth}">
+                                <Border BorderThickness="{TemplateBinding BorderThickness}" 
+                                        Background="White">
+                                    <ScrollViewer>
+                                        <ItemsPresenter/>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid Background="#FFFF6464" Margin="0,0,0,-16">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="731*"/>
@@ -24,7 +61,15 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle HorizontalAlignment="Left" Height="74" Margin="417,37,0,0" VerticalAlignment="Top" Width="741" RadiusX="53" RadiusY="53" Fill="#FFFF6464" Grid.ColumnSpan="2"/>
+        <Rectangle 
+            HorizontalAlignment="Left" 
+            Height="74" 
+            Margin="417,37,0,0" 
+            VerticalAlignment="Top" 
+            Width="741" RadiusX="53" 
+            RadiusY="53" 
+            Fill="#FFFF6464" 
+            Grid.ColumnSpan="2"/>
         <Rectangle 
             HorizontalAlignment="Left" 
             Height="62" Margin="10,571,0,0" 
@@ -91,15 +136,24 @@
             x:Name="PokemonComboBox" 
             HorizontalAlignment="Left" 
             Height="44" 
+            Width="380"
             Margin="30,582,0,0" 
             VerticalAlignment="Top" 
-            Width="380" 
             IsEditable="True"
             IsTextSearchEnabled="False"
             StaysOpenOnEdit="True"
             IsTextSearchCaseSensitive="False"
-            Text="Digite o nome do Pokémon..." 
-            FontSize="20" RenderTransformOrigin="0.58,-1.48" Background="Black" BorderThickness="0,0,0,0" />
+            Text="Digite o nome do Pokémon..."
+            FontSize="20" 
+            RenderTransformOrigin="0.58,-1.48" 
+            Background="Black" 
+            BorderThickness="0,0,0,0" 
+            VerticalContentAlignment="Center"
+            HorizontalContentAlignment="Left"
+            Style="{StaticResource SearchComboBoxStyle}"
+            />
+        
+        
         <Button Content="X" HorizontalAlignment="Left" Height="25" Margin="303,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
         <Button x:Name="MinimizarApp" Content="-" HorizontalAlignment="Left" Height="25" Margin="268,7,0,0" VerticalAlignment="Top" Width="25" Foreground="Black" BorderBrush="#FFFF6464" Background="#FFFF6464" Grid.Column="1"/>
 

@@ -11,6 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Linq;
 using System.Windows.Shapes;
+using System.Threading.Tasks;
 
 namespace pokedexApp
 {
@@ -40,7 +41,7 @@ namespace pokedexApp
             public int weight { get; set; }
             public List<TipoPokemon>? types { get; set; }
             public Sprites? sprites { get; set; }
-            public Species? species { get; set; }
+            //public Species? species { get; set; }
         }
 
         public class TipoPokemon
@@ -58,7 +59,7 @@ namespace pokedexApp
             public string front_default { get; set; }
         }
 
-        public class Species
+        /*public class Species
         {
             public EvolutionChainUrl? evolution_species { get; set;}
         }
@@ -66,17 +67,27 @@ namespace pokedexApp
         public class EvolutionChainUrl
         {
             public string url{ get; set; }
-        }
+        }*/
 
 
-            List<string> PokemonNomes = new List<string>();
+        List<string> PokemonNomes = new List<string>();
         CollectionView? view;
+
+        bool _isCleaning = false;
 
         public MainWindow()
         {
             InitializeComponent();
+
             CarregarTodosPokemons();
             ConfigurarComboBox();
+        }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            await Task.Delay(100);
+
+            this.Focus();
         }
 
         // FILTRO
@@ -119,31 +130,89 @@ namespace pokedexApp
                 view.Filter = null;
             }
         }
+
         private void PokemonComboBox_ValidarEntradas(object sender, TextCompositionEventArgs e)
         {
             
         }
         private void PokemonComboBox_SelecaoAlterada(object sender, SelectionChangedEventArgs e)
         {
-            if (PokemonComboBox.SelectedItem != null)
+            if (_isCleaning)
             {
-                string pokemonSelecionado = PokemonComboBox.SelectedItem.ToString();
-                MessageBox.Show($"Pokémon selecionado: {pokemonSelecionado}");
-                ObterDetalhesPokemonEscolhido(pokemonSelecionado);
-                LimparFiltro();
+                return;
+            }
+
+            string pokemonSelecionado = PokemonComboBox.SelectedItem?.ToString();
+            int indiceSelecionado = PokemonComboBox.SelectedIndex;
+
+            if (!string.IsNullOrEmpty(pokemonSelecionado))
+            {
+
+                if (indiceSelecionado > 0)
+                {
+                    //RETIRAR DPS
+                    MessageBox.Show($"Pokémon selecionado: {pokemonSelecionado}");
+                    ObterDetalhesPokemonEscolhido(pokemonSelecionado);
+                }
+            }
+            LimparFiltro();
+        }
+
+        /* private void PokemonComboBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            //Se o texto é o placeholder, limpa o campo para o user digitar
+            if(PokemonComboBox.Text == "Digite o nome do Pokemon...")
+            {
+                PokemonComboBox.Text = "";
             }
         }
-        
+
+        private void PokemonComboBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            // Se o usuário não digitou nada, restaura o placeholder.
+            if (String.IsNullOrWhiteSpace(PokemonComboBox.Text))
+            {
+                PokemonComboBox.Text = "Digite o nome do Pokemon...";
+            }
+        }*/
+
+
+        private void LimparFiltro()
+        {
+
+            PokemonComboBox.SelectionChanged -= PokemonComboBox_SelecaoAlterada;
+            _isCleaning = true;
+
+            if (view != null)
+            {
+                view.Filter = null;
+            }
+
+            PokemonComboBox.SelectedIndex = 0;
+            PokemonComboBox.Text = "Digite o nome do Pokemon...";
+
+            TraversalRequest request = new TraversalRequest(FocusNavigationDirection.Next);
+            UIElement elementComFoco = Keyboard.FocusedElement as UIElement;
+            if (elementComFoco != null)
+            {
+                elementComFoco.MoveFocus(request);
+            }
+            this.Focus();
+
+            PokemonComboBox.SelectionChanged += PokemonComboBox_SelecaoAlterada;
+            _isCleaning = false;
+        }
+
         private async void ObterDetalhesPokemonEscolhido(string pokemonEscolhido)
         {
             try
             {
                 using (HttpClient cliente = new HttpClient())
                 {
-                    string url = $"https://pokeapi.co/api/v2/pokemon/{pokemonEscolhido.ToLower()}";
-                    string json = await cliente.GetStringAsync(url);
-                    PokemonDetalhes detalhes = JsonConvert.DeserializeObject<PokemonDetalhes>(json);
-                    CarregarDetalhesPokemonEscolhido(detalhes);
+                        string url = $"https://pokeapi.co/api/v2/pokemon/{pokemonEscolhido.ToLower()}";
+                        string json = await cliente.GetStringAsync(url);
+                        PokemonDetalhes detalhes = JsonConvert.DeserializeObject<PokemonDetalhes>(json);
+                        CarregarDetalhesPokemonEscolhido(detalhes);
                 }
             }
             catch (Exception ex)
@@ -209,18 +278,6 @@ namespace pokedexApp
             return pokemon.StartsWith(textoPesquisa, StringComparison.OrdinalIgnoreCase);
         }
 
-        private void LimparFiltro()
-        {
-            if(view != null)
-            {
-                view.Filter = null;
-            }
-
-            PokemonComboBox.Text = "Digite o nome do Pokemo...";
-
-            PokemonComboBox.SelectedIndex = -1;
-        }
-
         private async void CarregarTodosPokemons()
         {
             try
@@ -234,6 +291,8 @@ namespace pokedexApp
                     PokemonApiResponse response = JsonConvert.DeserializeObject<PokemonApiResponse>(json);
 
                     PokemonNomes = response.results.Select(p => char.ToUpper(p.name[0]) + p.name.Substring(1)).OrderBy(p => p).ToList();
+
+                    PokemonNomes.Insert(0, "Digite o nome do Pokemon...");
 
                     // codigo da linha acima refatorado, para melhor entendimento
                     /*
@@ -249,6 +308,10 @@ namespace pokedexApp
                     */
 
                     PokemonComboBox.ItemsSource = PokemonNomes;
+
+                    PokemonComboBox.SelectedIndex = 0;
+
+                    //PokemonComboBox.SelectedIndex = 0;
 
                     view = (CollectionView)CollectionViewSource.GetDefaultView(PokemonComboBox.ItemsSource);
                     //view.Filter = FiltroDigitado;
