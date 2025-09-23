@@ -1,0 +1,40 @@
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.exe
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.deps.json
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.runtimeconfig.json
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.dll
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.pdb
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.FormPrincipal.resources
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.csproj.GenerateResource.cache
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.AssemblyInfoInputs.cache
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.AssemblyInfo.cs
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.csproj.CoreCompileInputs.cache
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.dll
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\refint\AcademicoAppV1.dll
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.pdb
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.genruntimeconfig.cache
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\ref\AcademicoAppV1.dll
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\ReaLTaiizor.dll
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.csproj.AssemblyReference.cache
+C:\Users\Aluno\source\repos\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\Academic.5876CE95.Up2Date
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.exe
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.deps.json
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.runtimeconfig.json
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.dll
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\AcademicoAppV1.pdb
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\bin\Debug\net8.0-windows\ReaLTaiizor.dll
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.csproj.AssemblyReference.cache
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.FormAluno.resources
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.FormPrincipal.resources
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.Properties.Resources.resources
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.csproj.GenerateResource.cache
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.GeneratedMSBuildEditorConfig.editorconfig
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.AssemblyInfoInputs.cache
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.AssemblyInfo.cs
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.csproj.CoreCompileInputs.cache
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\Academic.5876CE95.Up2Date
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.dll
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\refint\AcademicoAppV1.dll
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.pdb
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\AcademicoAppV1.genruntimeconfig.cache
+D:\POE pegadinhas\AcademicoAppV1\AcademicoAppV1\obj\Debug\net8.0-windows\ref\AcademicoAppV1.dll
